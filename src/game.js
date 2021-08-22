@@ -47,7 +47,9 @@ scene("game", ({ level, score }) => {
   
   
   const music = play('bg-music',{
-  volume: 0.1
+  volume: 0.1,
+  loop: 2
+  
   })
 
   add([sprite("bg"), origin("topleft")]);
@@ -89,11 +91,11 @@ scene("game", ({ level, score }) => {
       "                                       ",
       "                                       ",
       "                                       ",
-      "                                       ",
-      "                                       ",
-      "                                       ",
-      "         $ $                           ",
-      "       =*=%=       ==================                    ",
+      "                       $$$                ",
+      "                       bbb               ",
+      "                      b                 ",
+      "         $ $         b                  ",
+      "       =*=%=       bb================                    ",
       "                                       ",
       "                                       ",
       "      $$$    $$$                          ()  ",
@@ -144,13 +146,14 @@ scene("game", ({ level, score }) => {
       "                                          ",
     ],
   ];
-
+ 
   const levelCfg = {
     width: 20,
     height: 20,
     ".": [sprite("grass", solid())],
+    'b': [sprite('block',solid()), rect()],
     "=": [sprite("brick"), solid(), "brick"],
-    $: [sprite("coin"), "coin"],
+    '$': [sprite("coin"), "coin"],
     "%": [sprite("suprise-block"), solid(), "coin-surprise"],
     "£": [sprite("blue-brick"), solid(), scale(0.5)],
     "#": [sprite("mushroom"), solid(), "mushroom", body()],
@@ -173,7 +176,7 @@ scene("game", ({ level, score }) => {
     },
   ]);
   add([
-    text("World " + parseInt(level + 1)),
+    text("World " + parseInt(level + 1),12),
     pos(650, 30),
     layer("ui"),
     {
@@ -211,6 +214,11 @@ scene("game", ({ level, score }) => {
       },
     };
   }
+  const wall = add([
+    sprite('block'),
+    solid(),
+  ])
+ 
 
   const player = add([
     sprite("mario"),
@@ -301,6 +309,7 @@ scene("game", ({ level, score }) => {
       play("jump-s");
     }
   });
+  
 });
 
 scene("lose", ({ score }) => {
